@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    <!-- add <base href="/public"> for css will working properly for view  -->
+    <base href="/public">
     @include('admin.css')
 
     <style type="text/css">
@@ -59,55 +60,60 @@
                 @endif
 
               <div class="div_center">
-                  <h1 class="font_size">Add Product</h1>
+                  <h1 class="font_size">Update Product</h1>
 
 
 
-                  <form action="{{url('/add_product')}}" method="POST" enctype="multipart/form-data">
+                  <form action="{{url('/update_product_confirm', $product->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                             <div class="div_design">
                                 <label>Product Title :</label>
-                                <input class="text_color" type="text" name="title" placeholder="Write a title" required="">
+                                <input class="text_color" type="text" name="title" placeholder="Write a title" required="" value="{{$product->title}}">
                             </div>
 
                             <div class="div_design">
                                 <label >Product Description :</label>
-                                <input class="text_color" type="text" name="description" placeholder="Write a description" required="">
+                                <input class="text_color" type="text" name="description" placeholder="Write a description" required="" value="{{$product->description}}">
                             </div>
 
                             <div class="div_design">
                                 <label>Product Price :</label>
-                                <input class="text_color" type="number" name="price" placeholder="Write a price" required="">
+                                <input class="text_color" type="number" name="price" placeholder="Write a price" required="" value="{{$product->price}}">
                             </div>
 
                             <div class="div_design">
                                 <label>Discount Price :</label>
-                                <input class="text_color" type="number" name="dis_price" placeholder="Write a Discount is apply ">
+                                <input class="text_color" type="number" name="dis_price" placeholder="Write a Discount is apply " value="{{$product->discount_price}}">
                             </div>
 
                             <div class="div_design">
                                 <label>Product Quantity :</label>
-                                <input class="text_color" type="number" min="0" name="quantity" placeholder="Write a quantity" required="">
+                                <input class="text_color" type="number" min="0" name="quantity" placeholder="Write a quantity" required="" value="{{$product->quantity}}">
                             </div>
 
                             <div class="div_design">
                                 <label>Product Catagory :</label>
                                 <select class="text_color" name="category" required="">
-                                    <option value="" selected="">Add a catagory here</option>
+                                    <option value="{{$product->category}}" selected="">{{$product->category}}</option>
 
                                     @foreach($category as $category)
-                                    <option value="{{$category->catagory_name}}"> {{$category->category_name}}</option>
+                                        <option value="{{$category->catagory_name}}"> {{$category->category_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="div_design">
-                                <label>Product image here :</label>
-                                <input type="file" name="image" required="">
+                                <label>Current Product image:</label>
+                                <img style="margin:auto;" height="100" width="100" src="/product/{{$product->image}}" alt="">
                             </div>
 
                             <div class="div_design">
-                                <input type="submit" value="Add Product" class="btn btn-primary">
+                                <label>Change Product image:</label>
+                                <input type="file" name="image">
+                            </div>
+
+                            <div class="div_design">
+                                <input type="submit" value="Update Product" class="btn btn-primary">
                             </div>
 
                     </form>

@@ -68,7 +68,7 @@
 
                         @csrf
 
-                        <input class="input_color" type="text" name="catagory" placeholder="Write catagory name">
+                        <input class="input_color" type="text" name="category" placeholder="Write catagory name">
                         <input type="submit" class="btn btn-primary" name="submit" value="Add Catagory">
                     </form>
 
@@ -86,7 +86,7 @@
 
 
                     <tr>
-                        <td>{{$data->catagory_name}}</td>
+                        <td>{{$data->category_name}}</td>
                         <td>
                             <a onclick="return confirm('Are you Sure To Delete This')" class="btn btn-danger" href="{{url('delete_catagory',$data->id)}}">Delete</a>
                         </td>

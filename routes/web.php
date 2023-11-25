@@ -47,3 +47,12 @@ route::post('/add_product', [AdminController::class,'add_product']);
 
 // add this route for show product in admin
 route::get('/show_product', [AdminController::class,'show_product']);
+
+// add this route for delete action
+route::get('/delete_product/{id}', [AdminController::class,'delete_product']);
+
+// add this route for update action
+route::get('/update_product/{id}', [AdminController::class,'update_product']);
+
+// add this route for update to edit in database table
+route::post('/update_product_confirm/{id}', [AdminController::class,'update_product_confirm']);
