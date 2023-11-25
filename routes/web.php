@@ -26,12 +26,22 @@ Route::middleware([
     })->name('dashboard');
 });
 
+// add this route for view redirect admin panel dashboard in admin
 route::get('/redirect', [HomeController::class,'redirect']);
 
+// add this route for view catagory in admin
 route::get('/view_catagory', [AdminController::class,'view_catagory']);
 
+// add this route for view product in admin
 route::post('/add_catagory', [AdminController::class,'add_catagory']);
 
+// add this route for delete product in admin
 route::get('/delete_catagory/{id}', [AdminController::class,'delete_catagory']);
 
+// add this route for view product in admin
+route::get('/view_product', [AdminController::class,'view_product']);
+
+
+// add this route for add product in admin
+route::post('/add_product', [AdminController::class,'add_product']);
 

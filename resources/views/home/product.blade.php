@@ -146,7 +146,7 @@
                    </div>
                 </div>
                 <div class="img-box">
-                   <img src="images/p6.png" alt="">
+                   <img src="images/p13.png" alt="">
                 </div>
                 <div class="detail-box">
                    <h5>
