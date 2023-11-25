@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Catagory;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 
@@ -57,13 +57,20 @@ class AdminController extends Controller
         $image=$request->image;
 
         $imagename=time().'.'.$image->getClientOriginalExtension();
-        $request->image->move('product',$imagename);
+        $request->image->move(public_path('product'), $imagename);
 
-        $product->image=$image;
+        $product->image=$imagename;
 
 
         $product->save();
 
         return redirect()->back()->with('message','Product Added Successfully');
+    }
+
+    // create this controller function logic for show product in admin
+    public function show_product()
+    {
+        $product=product::all();
+       return view('admin.show_product', compact('product'));
     }
 }

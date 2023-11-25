@@ -43,7 +43,7 @@
       <div class="main-panel">
           <div class="content-wrapper">
 
-            // designed to display a success message in an alert box if the 'message' session variable exists.
+            <!-- designed to display a success message in an alert box if the 'message' session variable exists.-->
                 @if(session()->has('message'))
 
                     <div class="alert alert-success">

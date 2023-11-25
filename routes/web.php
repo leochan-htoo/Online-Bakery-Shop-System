@@ -45,3 +45,5 @@ route::get('/view_product', [AdminController::class,'view_product']);
 // add this route for add product in admin
 route::post('/add_product', [AdminController::class,'add_product']);
 
+// add this route for show product in admin
+route::get('/show_product', [AdminController::class,'show_product']);
