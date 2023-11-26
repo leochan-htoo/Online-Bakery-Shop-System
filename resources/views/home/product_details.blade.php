@@ -31,11 +31,11 @@
 
          <!-- adding this line below "style="margin: auto; width: 50%; padding: 30px">" for put product data center -->
 
-            <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50%; padding: 30px">
+            <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto;">
 
 
                 <div class="img-box" style="">
-                    <img src="{{('product/' . $product->image) }}" alt="">
+                    <img src="{{('product/' . $product->image) }}" alt="" width="250" height="250">
 
                 </div>
 

@@ -95,8 +95,9 @@
                                 <select class="text_color" name="category" required="">
                                     <option value="" selected="">Add a catagory here</option>
 
+                                    <!-- //catagory_name change to category_name -->
                                     @foreach($category as $category)
-                                    <option value="{{$category->catagory_name}}"> {{$category->category_name}}</option>
+                                    <option value="{{$category->category_name}}"> {{$category->category_name}}</option>
                                     @endforeach
                                 </select>
                             </div>

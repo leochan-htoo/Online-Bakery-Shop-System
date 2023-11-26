@@ -59,3 +59,6 @@ route::post('/update_product_confirm/{id}', [AdminController::class,'update_prod
 
 // add this route for show product details
 route::get('/product_details/{id}', [HomeController::class,'product_details']);
+
+// add this route for adding product to the cart
+route::post('/add_cart/{id}', [HomeController::class,'add_cart']);
