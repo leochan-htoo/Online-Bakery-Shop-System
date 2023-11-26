@@ -9,12 +9,14 @@
 
             @foreach ( $product as $products )
 
-                <div class="col-sm-6 col-md-4 col-lg-4">
+
+                <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50%; padding: 30px">
+
                     <div class="box">
-                        <div class="option_container">
+                        <div class="option_container" style="margin: auto; width: 50%; padding: 30px">
                             <div class="options">
-                                <a href="" class="option1">
-                                Men's Shirt
+                                <a href="{{url('product_details',$products->id)}}" class="option1">
+                                Product Detail LEO
                                 </a>
                                 <a href="" class="option2">
                                 Buy Now

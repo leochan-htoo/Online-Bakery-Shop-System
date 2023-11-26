@@ -33,5 +33,13 @@ class HomeController extends Controller
         }
     }
 
+    // this controller function logic is for view product_details before buying
+    public function product_details($id)
+
+    {
+        $product=product::find($id);
+        return view('home.product_details', compact('product'));
+    }
+
 
 }

@@ -56,3 +56,6 @@ route::get('/update_product/{id}', [AdminController::class,'update_product']);
 
 // add this route for update to edit in database table
 route::post('/update_product_confirm/{id}', [AdminController::class,'update_product_confirm']);
+
+// add this route for show product details
+route::get('/product_details/{id}', [HomeController::class,'product_details']);
