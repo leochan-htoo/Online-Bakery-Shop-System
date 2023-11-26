@@ -58,11 +58,13 @@ class HomeController extends Controller
 
                 if($product->dis_price!=null)
                 {
-                    $cart->price=$product->discount_price;
+                    //add this "* $request->quantity" conditional statement that calculates the price of a product
+                    $cart->price=$product->discount_price * $request->quantity;
                 }
                 else
                 {
-                    $cart->price=$product->price;
+                    //add this "* $request->quantity" conditional statement that calculates the price of a product
+                    $cart->price=$product->price * $request->quantity;
                 }
 
                 $cart->image=$product->image;
