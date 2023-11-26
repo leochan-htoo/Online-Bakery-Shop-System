@@ -7,7 +7,7 @@
        </div>
        <div class="row">
 
-            @foreach ( $product as $product )
+            @foreach ( $product as $products )
 
                 <div class="col-sm-6 col-md-4 col-lg-4">
                     <div class="box">
@@ -23,47 +23,45 @@
                         </div>
 
                         <div class="img-box">
-                            <img src="product/{{$product->image}}" alt="">
+                            <img src="product/{{$products->image}}" alt="">
                         </div>
 
                         <div class="detail-box">
                             <h5>
-                                {{$product->title}}
+                                {{$products->title}}
                             </h5>
 
-                                @if ($product->discount_price!=null)
+                                @if ($products->discount_price!=null)
                                         <h6 style="color: red">
                                             Discount price
                                             <br>
-                                            {{$product->discount_price}} BTH
+                                            {{$products->discount_price}} BTH
                                         </h6>
 
 
                                         <h6 style="text-decoration: line-through; color:blue">
                                             Price
                                             <br>
-                                            {{$product->price}} BTH
+                                            {{$products->price}} BTH
                                         </h6>
 
                                     @else
                                         <h6 style="color:blue">
                                             Price
                                             <br>
-                                            {{$product->price}} BTH
+                                            {{$products->price}} BTH
                                         </h6>
 
-
-
                                 @endif
-
-
 
                         </div>
                     </div>
                 </div>
 
             @endforeach
-
+                <span style="padding-top: 20px;">
+                    {!!$product->withQueryString()->links('pagination::bootstrap-5')!!}
+                </span>
        </div>
     </div>
  </section>

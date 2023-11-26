@@ -11,8 +11,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-
-        $product=Product::all();
+        // can limit data product category in user viewpage "$product=Product::paginate(10);"
+        $product=Product::paginate(10);
         return view('home.userpage', compact('product'));
     }
     public function redirect()
@@ -27,7 +27,9 @@ class HomeController extends Controller
         }
         else
         {
-            return view('home.userpage');
+            // use the same product of home.userpage to view product
+            $product=Product::paginate(10);
+        return view('home.userpage', compact('product'));
         }
     }
 
