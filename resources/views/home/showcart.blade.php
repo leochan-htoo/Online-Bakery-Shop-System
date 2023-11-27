@@ -86,7 +86,10 @@
                     <td>{{$cart->quantity}}</td>
                     <td>{{$cart->price}}</td>
                     <td><img class="img_deg" src="/product/{{$cart->image}}" alt=""></td>
-                    <td><a class="btn btn-danger" href="{{url/('remove_cart')}}">Remove</a></td>
+                        <td>
+                            {{-- add this onclick="return confirm warning first poshup to bar of navbar before to remove --}}
+                            <a class="btn btn-danger" onclick="return confirm('Are you sure to remove this product')" href="{{url('/remove_cart',$cart->id)}}">Remove</a>
+                        </td>
                 </tr>
                 <?php $totalprice=$totalprice + $cart->price ?>
             @endforeach

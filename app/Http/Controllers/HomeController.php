@@ -101,7 +101,15 @@ class HomeController extends Controller
         }
 
     }
+    //this function will remove product after adding product in package cart
+    public function remove_cart($id)
+    {
+        $cart=cart::find($id);
 
+        $cart->delete();
+
+        return redirect()->back();
+    }
 
 
 }
