@@ -16,15 +16,16 @@
                          </div>
                       </div>
                    </div>
+
                    <div class="detail-box">
                       <h5>
-                         Anna Trevor
+                         Leo Chan
                       </h5>
                       <h6>
                          Customer
                       </h6>
                       <p>
-                         Dignissimos reprehenderit repellendus nobis error quibusdam? Atque animi sint unde quis reprehenderit, et, perspiciatis, debitis totam est deserunt eius officiis ipsum ducimus ad labore modi voluptatibus accusantium sapiente nam! Quaerat.
+                        "In the world of bread and pastries, magic happens." "Indulging in the simplicity and beauty of freshly baked goodness."
                       </p>
                    </div>
                 </div>

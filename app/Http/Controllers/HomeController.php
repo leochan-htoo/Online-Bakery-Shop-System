@@ -82,5 +82,26 @@ class HomeController extends Controller
                 return redirect('login');
             }
     }
+    //this function will show cart notification sign after user add card
+    //use this logic function "$id=Auth::user()->id;" makesure to know user
+    //authticate user add cart after login
+    public function show_cart()
+    {
+        //use "if(Auth::id())" to check which user is auth adding cart
+        if(Auth::id())
+        {
+                $id=Auth::user()->id;
+            $cart=cart::where('user_id','=',$id)->get();
+            return view('home.showcart', compact('cart'));
+        }
+        // if no user login authenticate will require to login page
+        else
+        {
+            return redirect('login');
+        }
+
+    }
+
+
 
 }
