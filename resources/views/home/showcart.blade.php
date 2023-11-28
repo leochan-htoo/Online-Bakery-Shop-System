@@ -34,13 +34,21 @@
       table,th,td
       {
         border:2px solid rgb(0, 0, 0);
+        text-align: center;
+
+      }
+      table
+      {
+        padding: 0 90px 0 100px;
+        width: 80%;
+        margin: auto;
       }
 
       .th_deg
       {
-        font-size: 20px;
-        padding: 5px;
-        background: rgb(41, 234, 41);
+        font-size:20px;
+        padding: 4px;
+        background: rgb(181, 186, 208);
       }
       .img_deg
       {
@@ -51,8 +59,37 @@
       .total_deg
       {
         font-size: 20px;
-        padding: 40px;
+        padding: 50px 0 0 200px;
       }
+      /* Add a class to the specific td element you want to remove the border from */
+        .no-border
+        {
+            border: none;
+        }
+
+        .order-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .order-section h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .order-section .payment-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .order-section .payment-buttons .btn {
+    margin: 0 5px;
+  }
+
 
       </style>
 
@@ -66,8 +103,22 @@
 
          <!-- end slider section -->
 
+         @if(session()->has('message'))
 
-      <div class="center">
+            <div class="alert alert-success">
+
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x
+
+                </button>
+
+                    {{ session()->get('message') }}
+
+            </div>
+
+        @endif
+
+
+      <div class="">
         <table>
             <tr>
                 <th class="th_deg">Product title</th>
@@ -84,21 +135,43 @@
                 <tr>
                     <td>{{$cart->product_title}}</td>
                     <td>{{$cart->quantity}}</td>
-                    <td>{{$cart->price}}</td>
+                    <td>{{$cart->price}}BTH</td>
                     <td><img class="img_deg" src="/product/{{$cart->image}}" alt=""></td>
                         <td>
                             {{-- add this onclick="return confirm warning first poshup to bar of navbar before to remove --}}
-                            <a class="btn btn-danger" onclick="return confirm('Are you sure to remove this product')" href="{{url('/remove_cart',$cart->id)}}">Remove</a>
+                            <a class="btn btn-danger" onclick="return confirm('Are you sure to remove this product?')" href="{{url('/remove_cart',$cart->id)}}">Remove</a>
                         </td>
                 </tr>
                 <?php $totalprice=$totalprice + $cart->price ?>
             @endforeach
+            <tr>
+                <td class="no-border"></td>
+                <td class="no-border"></td>
+                <td class="no-border"><h1 class="">Total Price: {{$totalprice}}BTH</h1></td>
+                <td class="no-border"></td>
+                <td class="no-border"></td>
+            </tr>
+
 
         </table>
 
-        <div>
-            <h1 class="total_deg">Total Price: {{$totalprice}}</h1>
-        </div>
+        <div class="order-section">
+            <table>
+              <!-- Table rows omitted for brevity -->
+            </table>
+
+            <div>
+              <h1>Total Price: {{$totalprice}}BTH</h1>
+            </div>
+
+            <div class="proceed-section">
+              <h1>Proceed to Order</h1>
+              <div class="payment-buttons">
+                <a href="{{url('cash_order')}}" class="btn btn-danger">Cash On Delivery</a>
+                <a href="" class="btn btn-danger">Pay Using Card</a>
+              </div>
+            </div>
+          </div>
 
       </div>
 

@@ -68,3 +68,7 @@ route::get('/show_cart', [HomeController::class,'show_cart']);
 
 // add this route for remove after user add into the cart package
 route::get('/remove_cart/{id}', [HomeController::class,'remove_cart']);
+
+// add this route for for cash order
+
+route::get('/cash_order', [HomeController::class,'cash_order']);
