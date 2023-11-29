@@ -7,6 +7,9 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Order;
+use Illuminate\Support\Facades\Session;
+
+use Stripe;
 
 class HomeController extends Controller
 {
@@ -153,6 +156,28 @@ class HomeController extends Controller
 
         }
         return redirect()->back()->with('message','we have Received your Order. We will connect with you soon...');
+    }
+    // this function logic is for payment stripe
+    public function stripe($totalprice)
+    {
+        return view('home.stripe',compact('totalprice'));
+    }
+    public function stripePost(Request $request)
+
+    {
+        // stripe_secret API key is setup in env
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        Stripe\Charge::create ([
+                "amount" => 100 * 100,
+                "currency" => "usd",
+                "source" => $request->stripeToken,
+                "description" => "Thank for payment"
+        ]);
+
+        Session::flash('success', 'Payment successful!');
+
+        return back();
     }
 
 

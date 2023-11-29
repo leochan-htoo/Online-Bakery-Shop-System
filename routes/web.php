@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StripePaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,3 +74,14 @@ route::get('/remove_cart/{id}', [HomeController::class,'remove_cart']);
 // add this route for for cash order
 
 route::get('/cash_order', [HomeController::class,'cash_order']);
+
+// add this route for payment stripe
+route::get('/stripe/{totalprice}',[HomeController::class,'stripe']);
+
+/*
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+*/
+Route::post('stripe',[HomeController::class, 'stripePost'])->name('stripe.post');
+
