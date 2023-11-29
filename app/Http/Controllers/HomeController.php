@@ -162,17 +162,18 @@ class HomeController extends Controller
     {
         return view('home.stripe',compact('totalprice'));
     }
-    public function stripePost(Request $request)
+    public function stripePost(Request $request,$totalprice)
 
     {
         // stripe_secret API key is setup in env
+        dd($totalprice);
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         Stripe\Charge::create ([
-                "amount" => 100 * 100,
-                "currency" => "usd",
+                "amount" => $totalprice * 100,
+                "currency" => "thb",
                 "source" => $request->stripeToken,
-                "description" => "Thank for payment"
+                "description" => "Thank for payment."
         ]);
 
         Session::flash('success', 'Payment successful!');

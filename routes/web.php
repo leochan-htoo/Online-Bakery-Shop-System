@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\StripePaymentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -83,5 +83,5 @@ route::get('/stripe/{totalprice}',[HomeController::class,'stripe']);
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 */
-Route::post('stripe',[HomeController::class, 'stripePost'])->name('stripe.post');
+Route::post('stripe/{totalprice}',[HomeController::class,'stripePost'])->name('stripe.post');
 
