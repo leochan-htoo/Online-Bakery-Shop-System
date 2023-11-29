@@ -141,7 +141,7 @@ class HomeController extends Controller
          $order->image=$data->name;
          $order->product_id=$data->product_id;
 
-         $order->payment_status='cash on delivery';
+         $order->payment_status='Paid';
 
          $order->delivery_status='processing';
 
@@ -166,7 +166,7 @@ class HomeController extends Controller
 
     {
         // stripe_secret API key is setup in env
-        dd($totalprice);
+
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         Stripe\Charge::create ([

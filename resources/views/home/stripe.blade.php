@@ -1,29 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {{-- // add this "<base href="/public">" for css will working properly for view --}}
+    <base href="/public">
+
     <title></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <style type="text/css">
 
-        .containers {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
 
-        h1 {
-          margin-bottom: 20px;
-        }
-    </style>
+        <link rel="shortcut icon" href="images/favicon.png" type="">
+        <title>Famms - Fashion HTML Template</title>
+        <!-- bootstrap core css -->
+        <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
+        <!-- font awesome style -->
+        <link href="home/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- Custom styles for this template -->
+        <link href="home/css/style.css" rel="stylesheet" />
+        <!-- responsive style -->
+        <link href="home/css/responsive.css" rel="stylesheet" />
+
+        <style type="text/css">
+
+            .containers {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            }
+
+            h1 {
+            margin-bottom: 20px;
+
+            }
+        </style>
 
 </head>
 <body>
+    <div class="hero_area">
+        <!-- header section strats -->
+        <span style="font-size: 16px;">@include('home.header')</span>
+
+
 
 <div class="container">
 
     <div class="containers">
-        <h1>Pay Using Your Card -Total Amount {{$totalprice}}BTH</h1>
+        <h1 style="text-align: center; font-size: 18px; padding-bottom: 20px">Pay Using Your Card -Total Amount {{$totalprice}}BTH</h1>
     </div>
 
     <div class="row">
@@ -93,7 +115,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now </button>
+                                <input type="submit" name="" value="Pay Now">
                             </div>
                         </div>
 
