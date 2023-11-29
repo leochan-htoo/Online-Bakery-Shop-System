@@ -31,6 +31,8 @@ Route::middleware([
 // add this route for view redirect admin panel dashboard in admin
 route::get('/redirect', [HomeController::class,'redirect']);
 
+
+//**************************** Admin panel AdminController**********************************// -
 // add this route for view catagory in admin
 route::get('/view_catagory', [AdminController::class,'view_catagory']);
 
@@ -59,6 +61,17 @@ route::get('/update_product/{id}', [AdminController::class,'update_product']);
 // add this route for update to edit in database table
 route::post('/update_product_confirm/{id}', [AdminController::class,'update_product_confirm']);
 
+// add this route for show user order in admin panel
+route::get('/order', [AdminController::class,'order']);
+
+
+
+
+
+
+//**************************** User HomeController**********************************// -
+
+
 // add this route for show product details
 route::get('/product_details/{id}', [HomeController::class,'product_details']);
 
@@ -84,4 +97,6 @@ route::get('/stripe/{totalprice}',[HomeController::class,'stripe']);
 | contains the "web" middleware group. Now create something great!
 */
 Route::post('stripe/{totalprice}',[HomeController::class,'stripePost'])->name('stripe.post');
+
+
 

@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-        <link rel="shortcut icon" href="images/favicon.png" type="">
+        <link rel="shortcut icon" href="images/logo.png" type="">
         <title>Famms - Fashion HTML Template</title>
         <!-- bootstrap core css -->
         <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
