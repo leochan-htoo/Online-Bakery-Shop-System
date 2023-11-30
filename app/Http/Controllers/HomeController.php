@@ -15,9 +15,14 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $userId = Auth::user();
+
+        $totalQuantity = Cart::where('user_id', $userId)->count();
+
+
         // can limit data product category in user viewpage "$product=Product::paginate(10);"
         $product=Product::paginate(10);
-        return view('home.userpage', compact('product'));
+        return view('home.userpage', compact('product', 'totalQuantity'));
     }
     public function redirect()
     {
@@ -31,9 +36,18 @@ class HomeController extends Controller
         }
         else
         {
+
+            // cart number logic
+
+            $userId = Auth::user()->id;
+
+            $totalQuantity = Cart::where('user_id', $userId)->count();
+
+
+
             // use the same product of home.userpage to view product
             $product=Product::paginate(10);
-        return view('home.userpage', compact('product'));
+        return view('home.userpage', compact('product', 'totalQuantity'));
         }
     }
 
@@ -94,9 +108,14 @@ class HomeController extends Controller
         //use "if(Auth::id())" to check which user is auth adding cart
         if(Auth::id())
         {
+            $userId = Auth::user()->id;
+
+            $totalQuantity = Cart::where('user_id', $userId)->count();
+
+
                 $id=Auth::user()->id;
             $cart=cart::where('user_id','=',$id)->get();
-            return view('home.showcart', compact('cart'));
+            return view('home.showcart', compact('cart', 'totalQuantity'));
         }
         // if no user login authenticate will require to login page
         else
@@ -139,9 +158,9 @@ class HomeController extends Controller
          $order->price=$data->price;
          $order->quantity=$data->quantity;
          $order->image=$data->image;
-         $order->product_id=$data->product_id;
+         $order->product_id=$data->Product_id;
 
-         $order->payment_status='Paid';
+         $order->payment_status='cash on delivery';
 
          $order->delivery_status='processing';
 
@@ -160,7 +179,13 @@ class HomeController extends Controller
     // this function logic is for payment stripe
     public function stripe($totalprice)
     {
-        return view('home.stripe',compact('totalprice'));
+
+        $userId = Auth::user()->id;
+
+        $totalQuantity = Cart::where('user_id', $userId)->count();
+
+
+        return view('home.stripe',compact('totalprice', 'totalQuantity'));
     }
     public function stripePost(Request $request,$totalprice)
 

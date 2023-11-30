@@ -115,8 +115,6 @@ class AdminController extends Controller
             $product->image=$imagename;
         }
 
-
-
         $product->save();
 
         return redirect()->back()->with('message','Product Updated Successfully');
@@ -126,4 +124,18 @@ class AdminController extends Controller
       $order=order::all();
         return view('admin.order',compact('order'));
     }
+    //create this controller function logic for delivered
+    public function delivered($id)
+    {
+       $order=order::find($id);
+       $order->delivery_status="delivered";
+       $order->payment_status='Paid';
+
+       $order->save();
+
+       return redirect()->back();
+
+    }
+
+
 }

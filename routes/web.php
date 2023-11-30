@@ -64,6 +64,11 @@ route::post('/update_product_confirm/{id}', [AdminController::class,'update_prod
 // add this route for show user order in admin panel
 route::get('/order', [AdminController::class,'order']);
 
+// add this route for show user delivery in admin panel
+route::get('/delivered/{id}', [AdminController::class,'delivered']);
+
+
+
 
 
 
@@ -97,6 +102,8 @@ route::get('/stripe/{totalprice}',[HomeController::class,'stripe']);
 | contains the "web" middleware group. Now create something great!
 */
 Route::post('stripe/{totalprice}',[HomeController::class,'stripePost'])->name('stripe.post');
+
+
 
 
 
