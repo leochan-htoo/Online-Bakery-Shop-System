@@ -136,75 +136,92 @@ class HomeController extends Controller
 
     //this function will use for order payment for order items for order database to record in database attribute
     public function cash_order()
-    {
-        $user=Auth::user();
+{
+    $user = Auth::user();
+    $userid = $user->id;
 
-        $userid=$user->id;
+    $data = cart::where('user_id', '=', $userid)->get();
 
-        $data=cart::where('user_id','=',$userid)->get();
+    foreach ($data as $item) {
+        $order = new Order;
 
-        foreach($data as $data)
-        {
+        $order->name = $item->name;
+        $order->email = $item->email;
+        $order->phone = $item->phone;
+        $order->address = $item->address;
+        $order->user_id = $item->user_id;
 
-         $order=new Order;
+        $order->product_title = $item->product_title;
+        $order->price = $item->price;
+        $order->quantity = $item->quantity;
+        $order->image = $item->image;
+        $order->product_id = $item->product_id;
 
-         $order->name=$data->name;
-         $order->email=$data->email;
-         $order->phone=$data->phone;
-         $order->address=$data->address;
-         $order->user_id=$data->user_id;
+        $order->payment_status = 'cash on delivery';
+        $order->delivery_status = 'processing';
 
-         $order->product_title=$data->product_title;
-         $order->price=$data->price;
-         $order->quantity=$data->quantity;
-         $order->image=$data->image;
-         $order->product_id=$data->Product_id;
-
-         $order->payment_status='cash on delivery';
-
-         $order->delivery_status='processing';
-
-         $order->save();
-
-         $cart_id=$data->id;
-
-         $cart=cart::find($cart_id);
-
-         $cart->delete();
+        $order->save();
 
 
+        $cart = cart::find($item->id);
+        $cart->delete();
+    }
+
+    return redirect()->back()->with('message', 'We have received your order. We will connect with you soon...');
+}
+
+// This function logic is for payment stripe
+public function stripe($totalprice)
+{
+    $userId = Auth::user()->id;
+    $totalQuantity = Cart::where('user_id', $userId)->count();
+
+    return view('home.stripe', compact('totalprice', 'totalQuantity'));
+}
+
+public function stripePost(Request $request, $totalprice)
+{
+    // stripe_secret API key is set up in env
+    \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+    \Stripe\Charge::create([
+        "amount" => $totalprice * 100,
+        "currency" => "thb",
+        "source" => $request->stripeToken,
+        "description" => "Thank you for payment."
+    ]);
+
+            $user = Auth::user();
+            $userid = $user->id;
+
+            $data = cart::where('user_id', '=', $userid)->get();
+
+            foreach ($data as $item) {
+                $order = new Order;
+
+                $order->name = $item->name;
+                $order->email = $item->email;
+                $order->phone = $item->phone;
+                $order->address = $item->address;
+                $order->user_id = $item->user_id;
+
+                $order->product_title = $item->product_title;
+                $order->price = $item->price;
+                $order->quantity = $item->quantity;
+                $order->image = $item->image;
+                $order->product_id = $item->product_id;
+
+                $order->payment_status = 'paid';
+                $order->delivery_status = 'processing';
+
+                $order->save();
+
+                $cart = cart::find($item->id);
+                $cart->delete();
+            }
+            Session::flash('success', 'Payment successful!');
+
+            return back();
         }
-        return redirect()->back()->with('message','we have Received your Order. We will connect with you soon...');
-    }
-    // this function logic is for payment stripe
-    public function stripe($totalprice)
-    {
-
-        $userId = Auth::user()->id;
-
-        $totalQuantity = Cart::where('user_id', $userId)->count();
-
-
-        return view('home.stripe',compact('totalprice', 'totalQuantity'));
-    }
-    public function stripePost(Request $request,$totalprice)
-
-    {
-        // stripe_secret API key is setup in env
-
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        Stripe\Charge::create ([
-                "amount" => $totalprice * 100,
-                "currency" => "thb",
-                "source" => $request->stripeToken,
-                "description" => "Thank for payment."
-        ]);
-
-        Session::flash('success', 'Payment successful!');
-
-        return back();
-    }
-
 
 }
