@@ -83,7 +83,7 @@
                             </td>
 
                             <td>
-                                <a href="{{url('print_pdf',$order->id)}}" class="btn btn-secondary">Print PDF</a>
+                                <a href="{{url('print_pdf',$order->id)}}" class="btn btn-secondary btn-sm">Print PDF</a>
                             </td>
 
                         </tr>

@@ -142,8 +142,9 @@ class AdminController extends Controller
     // create this controller function logic for print pdf of user make order receit
     public function print_pdf($id)
     {
-        $pdf=PDF::loadView('admin.pdf');
-        return $pdf->download('order_details');
+        $order=order::find($id);
+        $pdf=PDF::loadView('admin.pdf',compact('order'));
+        return $pdf->download('order_details.pdf');
     }
 
 }
