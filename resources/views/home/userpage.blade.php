@@ -20,6 +20,27 @@
       <link href="home/css/style.css" rel="stylesheet" />
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
+
+      <style>
+        /* Custom styles for the cart icon and count */
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -10px; /* Adjust the top position to move the number higher */
+            right: 5px;
+            background-color: red; /* Customize the background color */
+            color: white; /* Customize the text color */
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-size: 10px
+
+        }
+    </style>
    </head>
    <body>
       <div class="hero_area">
@@ -66,5 +87,8 @@
       <script src="home/js/bootstrap.js"></script>
       <!-- custom js -->
       <script src="home/js/custom.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
    </body>
 </html>

@@ -15,9 +15,18 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $userId = Auth::user();
+        if (Auth::check()) {
 
+        $userId = Auth::user()->id;
         $totalQuantity = Cart::where('user_id', $userId)->count();
+
+        }
+        else
+        {
+            $totalQuantity=0;
+        }
+
+
 
 
         // can limit data product category in user viewpage "$product=Product::paginate(10);"

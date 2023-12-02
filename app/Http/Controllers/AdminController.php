@@ -11,6 +11,8 @@ use App\Models\Product;
 use App\Models\Order;
 
 
+use PDF;
+
 class AdminController extends Controller
 
 {
@@ -137,5 +139,11 @@ class AdminController extends Controller
 
     }
 
+    // create this controller function logic for print pdf of user make order receit
+    public function print_pdf($id)
+    {
+        $pdf=PDF::loadView('admin.pdf');
+        return $pdf->download('order_details');
+    }
 
 }

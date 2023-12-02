@@ -1,15 +1,5 @@
 <header class="header_section">
-    <style>
-#cartCount {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    padding: 3px;
-    border-radius: 50%;
-    background: red;
-    color: white;
-}
-</style>
+
     <div class="container">
        <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="{{url('/')}}"><img width="100" src="images/logo.png" alt="#" /></a>
@@ -36,7 +26,7 @@
                  </li> --}}
                  @auth
                  <li class="nav-item">
-                    <a class="nav-link" href="{{url('show_cart')}}">
+                    <a class="nav-link cart-icon" href="{{url('show_cart')}}">
                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                           <g>
                              <g>

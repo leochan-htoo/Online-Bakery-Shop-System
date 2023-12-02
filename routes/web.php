@@ -67,6 +67,9 @@ route::get('/order', [AdminController::class,'order']);
 // add this route for show user delivery in admin panel
 route::get('/delivered/{id}', [AdminController::class,'delivered']);
 
+// add this route for print_pdf of user customer make order in admin panel
+route::get('/print_pdf/{id}', [AdminController::class,'print_pdf']);
+
 
 
 

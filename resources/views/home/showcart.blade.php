@@ -23,6 +23,26 @@
 
       <style type="text/css">
 
+        /* Custom styles for the cart icon and count */
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -10px; /* Adjust the top position to move the number higher */
+            right: 5px;
+            background-color: red; /* Customize the background color */
+            color: white; /* Customize the text color */
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-size: 10px
+
+        }
+
+
       .center
       {
         margin: auto;
