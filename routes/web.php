@@ -31,6 +31,8 @@ Route::middleware([
 // add this route for view redirect admin panel dashboard in admin
 route::get('/redirect', [HomeController::class,'redirect']);
 
+route::get('/productview', [HomeController::class,'productview']);
+
 
 //**************************** Admin panel AdminController**********************************// -
 // add this route for view catagory in admin

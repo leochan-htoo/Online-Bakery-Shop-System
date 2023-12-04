@@ -71,7 +71,7 @@
                     <th style="padding: 5px; border: 1px solid #999;">Print PDF</th>
                     </tr>
 
-                    @foreach ($order as $order)
+                    @forelse ($order as $order)
                         <tr style="border: 1px solid #999;">
                             <td style="padding: 5px; border: 1px solid #999;">{{ $order->name }}</td>
                             <td style="padding: 5px; border: 1px solid #999;">{{ $order->email }}</td>
@@ -98,7 +98,13 @@
                             </td>
 
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="16">
+                                No Data Found
+                            </td>
+                        </tr>
+                    @endforelse
 
                 </table>
             </div>

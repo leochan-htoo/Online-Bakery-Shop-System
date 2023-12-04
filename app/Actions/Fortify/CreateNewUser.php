@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 
+
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
@@ -34,5 +35,7 @@ class CreateNewUser implements CreatesNewUsers
             'address' => $input['address'],
             'password' => Hash::make($input['password']),
         ]);
+
+
     }
 }

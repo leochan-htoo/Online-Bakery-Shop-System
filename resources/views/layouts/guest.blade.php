@@ -21,6 +21,8 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        {{-- add this for nofification pupose after composer install sweetalert --}}
+
 
         @livewireScripts
     </body>

@@ -232,5 +232,12 @@ public function stripePost(Request $request, $totalprice)
 
             return back();
         }
+        public function productview()
+        {
+            $product = Product::all();
+
+            return view('home.productview', compact('product'));
+        }
+
 
 }
