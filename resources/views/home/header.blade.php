@@ -8,19 +8,26 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
              <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link home-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item ">
+                   <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item ">
                    <a class="nav-link" href="{{url('productview')}}">Products <span class="sr-only">(current)</span></a>
                 </li>
+
                 {{-- <li class="nav-item">
                    <a class="nav-link" href="blog_list.html">Blog</a>
                 </li> --}}
                 <li class="nav-item">
                    <a class="nav-link" href="contact.html">Contact</a>
                 </li>
+
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{url('show_order')}}">Order <span class="sr-only">(current)</span></a>
+                 </li>
+
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="{{url('show_cart')}}">Cart</a>
                  </li> --}}

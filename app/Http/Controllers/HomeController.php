@@ -233,11 +233,43 @@ public function stripePost(Request $request, $totalprice)
             return back();
         }
         public function productview()
-        {
-            $product = Product::all();
-
-            return view('home.productview', compact('product'));
-        }
+            {
+                $product = Product::all();
 
 
-}
+
+                    $user=Auth::user();
+                    $userid=$user->id;
+                    //
+
+                    $totalQuantity = Cart::where('user_id', $userid)->count();
+
+                    $order=order::where('user_id','=',$userid)->get();
+
+                    return view('home.productview',compact('product' ,'totalQuantity'));
+            }
+            public function show_order()
+                {
+                    if (Auth::id()) {
+                        $user = Auth::user();
+                        $userid = $user->id;
+
+                        // Retrieve total quantity from the Cart model (assuming you have a Cart model)
+                        $totalQuantity = Cart::where('user_id', $userid)->count();
+
+                        // Retrieve orders from the Order model (assuming the model is named Order)
+                        $orders = Order::where('user_id', $userid)->latest()->get();
+
+                        return view('home.order', compact('orders', 'totalQuantity'));
+                    } else {
+                        return redirect('login');
+                    }
+                }
+
+    }
+
+
+
+
+
+
