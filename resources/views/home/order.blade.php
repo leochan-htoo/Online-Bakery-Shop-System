@@ -82,6 +82,7 @@
                     <th class="th_deg">Payment Status</th>
                     <th class="th_deg">Delivery Status</th>
                     <th class="th_deg">Image</th>
+                    <th class="th_deg">Cancel Order</th>
                 </tr>
 
                 @foreach ($orders->sortByDesc('created_at') as $orderItem)
@@ -94,6 +95,10 @@
                         <td>
                             <img src="product/{{$orderItem->image}}" class="product-image">
                         </td>
+                        <td>
+                            <a class="btn btn-danger" href="{{ url('cancel_order', $orderItem->id) }}">Cancel Order</a>
+                        </td>
+
                     </tr>
                 @endforeach
             </table>

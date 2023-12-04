@@ -232,6 +232,7 @@ public function stripePost(Request $request, $totalprice)
 
             return back();
         }
+        // This function logic is for view product for user
         public function productview()
             {
                 $product = Product::all();
@@ -248,6 +249,7 @@ public function stripePost(Request $request, $totalprice)
 
                     return view('home.productview',compact('product' ,'totalQuantity'));
             }
+            // This function logic is for show user order in card
             public function show_order()
                 {
                     if (Auth::id()) {
@@ -264,6 +266,19 @@ public function stripePost(Request $request, $totalprice)
                     } else {
                         return redirect('login');
                     }
+                }
+
+
+                // This function logic is for cancel after user order a few minute
+                public function cancel_order($id)
+                {
+
+                    $order=order::find($id);
+                    $order->delivery_status='You cancel the order';
+
+                    $order->save();
+                    return redirect()->back();
+
                 }
 
     }
