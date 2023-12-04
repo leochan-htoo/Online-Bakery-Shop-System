@@ -44,6 +44,17 @@
             <div class="content-wrapper">
                 <h1 class="title_deg">All Order</h1>
 
+                <div style="padding-left: 400px; padding-bottom: 30px;">
+
+                    <form action="{{url('search')}}" method="get">
+                        @csrf
+                        <input type="text" style="color: black;" name="search" placeholder="Search For Something">
+
+                        <input type="submit" value="Search" class="btn btn-outline-primary">
+                    </form>
+
+                </div>
+
                 <table class="table_deg" style="border-collapse: collapse; width: 100%;">
                     <tr class="th_deg" style="background-color: #126843; border: 1px solid #999;">
                     <th style="padding: 5px; border: 1px solid #999;">Name</th>

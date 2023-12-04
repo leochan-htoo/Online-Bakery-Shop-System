@@ -147,4 +147,13 @@ class AdminController extends Controller
         return $pdf->download('order_details.pdf');
     }
 
+    //create this controller function logic for search product data
+    public function searchdata(Request $request)
+{
+    $searchText = $request->search;
+    $order = Order::where('name', 'LIKE', '%' . $searchText . '%')->get();
+
+    return view('admin.order', compact('order'));
+}
+
 }

@@ -70,7 +70,8 @@ route::get('/delivered/{id}', [AdminController::class,'delivered']);
 // add this route for print_pdf of user customer make order in admin panel
 route::get('/print_pdf/{id}', [AdminController::class,'print_pdf']);
 
-
+// add this route for search product data in admin panel
+route::get('/search', [AdminController::class,'searchdata']);
 
 
 
