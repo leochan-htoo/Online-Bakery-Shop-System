@@ -54,10 +54,10 @@
                   </div>
                 </div>
                 <div class="col-3">
-                  <div class="icon icon-box-danger">
-                    <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+                    <div class="icon icon-box-success ">
+                      <span class="mdi mdi-arrow-top-right icon-item"></span>
+                    </div>
                   </div>
-                </div>
               </div>
               <h6 class="text-muted font-weight-normal">Total Customer</h6>
             </div>

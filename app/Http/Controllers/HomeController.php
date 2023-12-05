@@ -10,6 +10,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Session;
 
 use Stripe;
+use App\Models\Comment;
 
 class HomeController extends Controller
 {
@@ -297,6 +298,23 @@ public function stripePost(Request $request, $totalprice)
                     $order->save();
                     return redirect()->back();
 
+                }
+                public function add_comment(Request $request)
+                {
+                    if(Auth::id())
+                    {
+                        $comment=new comment;
+                        $comment->name=Auth::user()->name;
+                        $comment->name=Auth::user()->id;
+                        $comment->comment=$request->comment;
+
+                        $comment->save();
+                        return redirect()->back();
+                    }
+                    else
+                    {
+                        return redirect('login');
+                    }
                 }
 
     }
