@@ -34,31 +34,49 @@ class HomeController extends Controller
         return view('home.userpage', compact('product', 'totalQuantity'));
     }
     public function redirect()
-    {
-
-        $usertype=Auth::user()->usertype;
-
-        if($usertype=='1')
-
         {
-            return view('admin.home');
+            $usertype = Auth::user()->usertype;
+
+            // create total price from user of record in Admin panel
+            if ($usertype == '1') {
+
+                //it is count total amout of product display in admin panel
+                $total_product = Product::all()->count();
+
+                //it is count total amout of  total order product
+                $total_order = Order::all()->count();
+
+                //it is count total amout of user
+                $total_user = User::all()->count();
+
+                $order = Order::all();
+
+                $total_revenue = 0;
+
+                foreach ($order as $order) {
+                    $total_revenue = $total_revenue + $order->price;
+                }
+
+                //it is count total amout of total of delivery
+                $total_delivered=order::where('delivery_status','=','delivered')->get()->count();
+
+                //it is count total amout of total processing
+                $total_processing=order::where('delivery_status','=','processing')->get()->count();
+
+
+                return view('admin.home', compact('total_product', 'total_order', 'total_user', 'total_revenue','total_delivered', 'total_processing'));
+            } else {
+                // Cart number logic
+                $userId = Auth::user()->id;
+                $totalQuantity = Cart::where('user_id', $userId)->count();
+
+                // Use the same product of home.userpage to view product
+                $product = Product::paginate(10);
+
+                return view('home.userpage', compact('product', 'totalQuantity'));
+            }
         }
-        else
-        {
 
-            // cart number logic
-
-            $userId = Auth::user()->id;
-
-            $totalQuantity = Cart::where('user_id', $userId)->count();
-
-
-
-            // use the same product of home.userpage to view product
-            $product=Product::paginate(10);
-        return view('home.userpage', compact('product', 'totalQuantity'));
-        }
-    }
 
     // this controller function logic is for view product_details before buying
     public function product_details($id)
