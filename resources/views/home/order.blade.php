@@ -95,8 +95,16 @@
                         <td>
                             <img src="product/{{$orderItem->image}}" class="product-image">
                         </td>
+
                         <td>
-                            <a class="btn btn-danger" href="{{ url('cancel_order', $orderItem->id) }}">Cancel Order</a>
+                            @if($orderItem->delivery_status == 'processing')
+                                <a onclick="return confirm('Are you sure you want to cancel this order?')" class="btn btn-danger" href="{{ url('cancel_order', $orderItem->id) }}">Cancel Order</a>
+                            @else
+                                <p style="color: blue">Not Allowed</p>
+                            @endif
+                        </td>
+
+
                         </td>
 
                     </tr>
