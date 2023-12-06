@@ -73,8 +73,9 @@ class HomeController extends Controller
 
                 // Use the same product of home.userpage to view product
                 $product = Product::paginate(10);
+                $comment=comment::all();
 
-                return view('home.userpage', compact('product', 'totalQuantity'));
+                return view('home.userpage', compact('product', 'totalQuantity','comment'));
             }
         }
 
@@ -299,6 +300,8 @@ public function stripePost(Request $request, $totalprice)
                     return redirect()->back();
 
                 }
+
+                // This function logic is for adding comment from user
                 public function add_comment(Request $request)
                 {
                     if(Auth::id())

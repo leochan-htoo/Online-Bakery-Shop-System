@@ -1,4 +1,4 @@
-<section class="subscribe_section">
+{{-- <section class="subscribe_section">
     <div class="container-fuild">
        <div class="box">
           <div class="row">
@@ -19,4 +19,4 @@
           </div>
        </div>
     </div>
- </section>
+ </section> --}}

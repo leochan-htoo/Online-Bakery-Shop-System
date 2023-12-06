@@ -80,27 +80,23 @@
 
         <div style="padding-left: 20%;">
             <h1 style="font-size: 20px; padding-bottom: 20px">All Comments</h1>
+
+            @foreach ($comment as $comment )
+
+
             <div>
-                <b>Leochan</b>
-                <p>This is my first comment</p>
+                <b>{{$comment->name}}</b>
+                <p>{{$comment->comment}}</p>
                 <a href="javascript:void(0);" onclick="reply(this)" style="color: blue">reply</a>
 
             </div>
-            <div>
-                <b>Leokali</b>
-                <p>This is my second comment</p>
-                <a href="javascript:void(0);" onclick="reply(this)" style="color: blue">reply</a>
-            </div>
-            <div>
-                <b>Leohtoo</b>
-                <p>This is my Third comment</p>
-                <a href="javascript:void(0);" onclick="reply(this)" style="color: blue">reply</a>
-            </div>
+            @endforeach
 
             <div style="display: none;" class="replyDiv">
                 <textarea style="height: 100px; width: 500px;" onclick="reply(this)" placeholder="write something here"></textarea>
                 <br>
                 <a href="" class="btn btn-primary">Reply</a>
+                <a href="" class="btn" onclick="reply_close(this)">Close</a>
 
             </div>
 
@@ -135,7 +131,16 @@
                 $('.replyDiv').insertAfter($(caller));
                 $('.replyDiv').show();
             }
-        </script>
+
+
+            function reply_close(caller)
+
+            {
+
+                $('.replyDiv').hide();
+            }
+            </script>
+
       <!-- jQery -->
       <script src="home/js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->
