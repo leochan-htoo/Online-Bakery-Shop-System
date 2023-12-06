@@ -33,8 +33,12 @@ class HomeController extends Controller
 
         // can limit data product category in user viewpage "$product=Product::paginate(10);"
         $product=Product::paginate(10);
-        $comment=comment::all();
-        return view('home.userpage', compact('product', 'totalQuantity','comment'));
+
+        $comment=comment::orderby('id','desc')->get();
+
+        $reply=reply::all();
+
+        return view('home.userpage', compact('product', 'totalQuantity','comment','reply'));
     }
     public function redirect()
         {
@@ -75,9 +79,11 @@ class HomeController extends Controller
 
                 // Use the same product of home.userpage to view product
                 $product = Product::paginate(10);
-                $comment=comment::all();
+                // use this for comment defined
+                $comment=comment::orderby('id','desc')->get();
+                $reply=reply::all();
 
-                return view('home.userpage', compact('product', 'totalQuantity','comment'));
+                return view('home.userpage', compact('product', 'totalQuantity','comment','reply'));
             }
         }
 

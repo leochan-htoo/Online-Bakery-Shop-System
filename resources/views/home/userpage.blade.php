@@ -83,14 +83,31 @@
 
             @foreach ($comment as $comment )
 
+                <div>
+                    <b>{{$comment->name}}</b>
+                    <p>{{$comment->comment}}</p>
+                    <a href="javascript:void(0);" onclick="reply(this)" data-Commentid='{{$comment->id}}' style="color: blue">Reply</a>
 
-            <div>
-                <b>{{$comment->name}}</b>
-                <p>{{$comment->comment}}</p>
-                <a href="javascript:void(0);" onclick="reply(this)" data-Commentid='{{$comment->id}}' style="color: blue">reply</a>
+                    {{-- add in foreach loop for show the user reply on the comment --}}
+                        @foreach ($reply as $rep)
+                            {{-- check connection just show the reply only the userID comment --}}
+                            @if($rep->comment_id==$comment->id)
+                                <div style="padding-left: 3%; paddding-bottom: 10px; padding-bottom: 10px;">
 
-            </div>
+
+                                    <b>{{$rep->name}}</b>
+                                    <p>{{$rep->reply}}</p>
+                                    <a href="javascript:void(0);" onclick="reply(this)" data-Commentid='{{$comment->id}}' style="color: blue">Reply</a>
+
+
+                                </div>
+                            @endif
+
+                        @endforeach
+                </div>
             @endforeach
+
+
 
             {{-- Reply Textbox --}}
 
@@ -149,6 +166,18 @@
                 $('.replyDiv').hide();
             }
             </script>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function(event) {
+                        var scrollpos = localStorage.getItem('scrollpos');
+                        if (scrollpos) window.scrollTo(0, scrollpos);
+                    });
+
+                    window.onbeforeunload = function(e) {
+                        localStorage.setItem('scrollpos', window.scrollY);
+                    };
+                </script>
+
 
       <!-- jQery -->
       <script src="home/js/jquery-3.4.1.min.js"></script>
