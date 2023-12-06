@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 use Stripe;
 use App\Models\Comment;
+use App\Models\Reply;
 
 class HomeController extends Controller
 {
@@ -32,7 +33,8 @@ class HomeController extends Controller
 
         // can limit data product category in user viewpage "$product=Product::paginate(10);"
         $product=Product::paginate(10);
-        return view('home.userpage', compact('product', 'totalQuantity'));
+        $comment=comment::all();
+        return view('home.userpage', compact('product', 'totalQuantity','comment'));
     }
     public function redirect()
         {
@@ -306,12 +308,30 @@ public function stripePost(Request $request, $totalprice)
                 {
                     if(Auth::id())
                     {
+
                         $comment=new comment;
                         $comment->name=Auth::user()->name;
-                        $comment->name=Auth::user()->id;
+                        $comment->user_id=Auth::user()->id;
                         $comment->comment=$request->comment;
 
                         $comment->save();
+                        return redirect()->back();
+                    }
+                    else
+                    {
+                        return redirect('login');
+                    }
+                }
+                public function add_reply(Request $request)
+                {
+                    if(Auth::id())
+                    {
+                        $reply=new reply;
+                        $reply->name=Auth::user()->name;
+                        $reply->user_id=Auth::user()->id;
+                        $reply->comment_id=$request->commentId;
+                        $reply->reply=$request->reply;
+                        $reply->save();
                         return redirect()->back();
                     }
                     else

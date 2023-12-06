@@ -112,11 +112,14 @@ Route::post('stripe/{totalprice}',[HomeController::class,'stripePost'])->name('s
 // add this route for create show order in user view page
 route::get('/show_order', [HomeController::class,'show_order']);
 
+// add this route for cancle order
 route::get('/cancel_order/{id}', [HomeController::class,'cancel_order']);
 
-
+// add this route for adding comment for user
 route::post('/add_comment',[HomeController::class,'add_comment']);
 
+// add this route for reply from user comment
+route::post('/add_reply',[HomeController::class,'add_reply']);
 
 
 

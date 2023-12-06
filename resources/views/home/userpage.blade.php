@@ -87,16 +87,24 @@
             <div>
                 <b>{{$comment->name}}</b>
                 <p>{{$comment->comment}}</p>
-                <a href="javascript:void(0);" onclick="reply(this)" style="color: blue">reply</a>
+                <a href="javascript:void(0);" onclick="reply(this)" data-Commentid='{{$comment->id}}' style="color: blue">reply</a>
 
             </div>
             @endforeach
 
+            {{-- Reply Textbox --}}
+
             <div style="display: none;" class="replyDiv">
-                <textarea style="height: 100px; width: 500px;" onclick="reply(this)" placeholder="write something here"></textarea>
-                <br>
-                <a href="" class="btn btn-primary">Reply</a>
-                <a href="" class="btn" onclick="reply_close(this)">Close</a>
+
+                <form action="{{url('add_reply')}}" method="POST">
+
+                    @csrf
+                    <input type="text" id="commentId" name="commentId" hidden="">
+                    <textarea style="height: 100px; width: 500px;" name="reply" onclick="reply(this)" placeholder="write something here"></textarea>
+                    <br>
+                    <button type="submit" class="btn btn-warning"> Reply</button>
+                    <a href="javascript::void(0);" class="btn" onclick="reply_close(this)">Close</a>
+                </form>
 
             </div>
 
@@ -128,6 +136,7 @@
         function reply(caller)
 
             {
+                document.getElementById('commentId').value=$(caller).attr('data-CommentId')
                 $('.replyDiv').insertAfter($(caller));
                 $('.replyDiv').show();
             }
