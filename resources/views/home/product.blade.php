@@ -4,6 +4,16 @@
             <h2>
                 Our <span>products</span>
             </h2>
+            <br><br>
+            <div>
+                <form action="{{url('product_search')}}" method="GET">
+                    <input style="width: 500px;" type="text" name="search" placeholder="search for Something">
+
+                    <input type="submit" value="search">
+                </form>
+            </div>
+
+
         </div>
         <div class="row">
             @foreach ($product as $products)
@@ -68,7 +78,7 @@
             </div>
             @endforeach
             <span style="padding-top: 20px;">
-                {{-- {!! $product->withQueryString()->links('pagination::bootstrap-5') !!} --}}
+                {!! $product->withQueryString()->links('pagination::bootstrap-5') !!}
             </span>
         </div>
     </div>

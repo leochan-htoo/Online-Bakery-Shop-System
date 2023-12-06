@@ -121,8 +121,8 @@ route::post('/add_comment',[HomeController::class,'add_comment']);
 // add this route for reply from user comment
 route::post('/add_reply',[HomeController::class,'add_reply']);
 
-
-
+// add this route for user to search product
+route::get('/product_search',[HomeController::class,'product_search']);
 
 
 
