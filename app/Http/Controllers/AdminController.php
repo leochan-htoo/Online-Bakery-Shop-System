@@ -31,8 +31,7 @@ class AdminController extends Controller
             }
 
 
-            $data=category::all();
-            return view('admin.category', compact('data'));
+
         }
     // this code function is for add product catagory for admin catagory
     public function add_catagory(Request $request)
@@ -110,7 +109,9 @@ class AdminController extends Controller
     //create this controller function logic for update to confirm product id to new in database
     public function update_product_confirm(Request $request, $id)
         {
-            $product=product::find($id);
+            if(Auth::id())
+            {
+                $product=product::find($id);
 
             $product->title=$request->title;
             $product->description=$request->description;
@@ -132,6 +133,13 @@ class AdminController extends Controller
             $product->save();
 
             return redirect()->back()->with('message','Product Updated Successfully');
+            }
+            else
+            {
+                return redirect('login');
+            }
+
+
         }
     public function order()
         {
