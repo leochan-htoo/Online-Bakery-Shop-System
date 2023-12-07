@@ -89,7 +89,7 @@
                     <tr>
                         <td>{{$orderItem->product_title}}</td>
                         <td>{{$orderItem->quantity}}</td>
-                        <td>{{$orderItem->price}}</td>
+                        <td>{{$orderItem->price}} THB</td>
                         <td>{{$orderItem->payment_status}}</td>
                         <td>{{$orderItem->delivery_status}}</td>
                         <td>

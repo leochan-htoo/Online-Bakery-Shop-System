@@ -31,7 +31,7 @@ Route::middleware([
 // add this route for view redirect admin panel dashboard in admin
 route::get('/redirect', [HomeController::class,'redirect']);
 
-route::get('/productview', [HomeController::class,'productview']);
+// route::get('/productview', [HomeController::class,'productview']);
 
 
 //**************************** Admin panel AdminController**********************************// -
@@ -124,6 +124,8 @@ route::post('/add_reply',[HomeController::class,'add_reply']);
 // add this route for user to search product
 route::get('/product_search',[HomeController::class,'product_search']);
 
+// add this to show user how many product
+route::get('/products',[HomeController::class,'product']);
 
-
+route::get('/search_product',[HomeController::class,'search_product']);
 

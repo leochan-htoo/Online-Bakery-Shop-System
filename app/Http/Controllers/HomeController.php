@@ -97,46 +97,82 @@ class HomeController extends Controller
     }
     // add this route function to add product in the cart
     public function add_cart(Request $request, $id)
-    {
-        if(Auth::id())
             {
-                $user=Auth::user();
-                $product=product::find($id);
-                $cart=new cart;
-                $cart->name=$user->name;
-                $cart->email=$user->email;
-                $cart->phone=$user->phone;
-                $cart->address=$user->address;
-                $cart->user_id=$user->id;
+                if(Auth::id())
+                    {
+                        $user=Auth::user();
+                        $userid=$user->id;
+                        $product=product::find($id);
 
-                $cart->Product_title=$product->title;
+                        $product_exist_id=cart::where('product_id','=',$id)->where('user_id', '=',  $userid)->get('id')->first();
 
-                if($product->dis_price!=null)
-                {
-                    //add this "* $request->quantity" conditional statement that calculates the price of a product
-                    $cart->price=$product->discount_price * $request->quantity;
-                }
+                        if($product_exist_id)
+                            {
+                                $cart=cart::find($product_exist_id)->first();
+
+                                $quatity=$cart->quantity;
+
+                                $cart->quantity=$quatity + $request->quantity;
+
+                                    if($product->dis_price!=null)
+                                        {
+                                            //add this "* $request->quantity" conditional statement that calculates the price of a product
+                                            $cart->price=$product->discount_price * $cart->quantity;
+                                        }
+                                    else
+                                        {
+                                            //add this "* $request->quantity" conditional statement that calculates the price of a product
+                                            $cart->price=$product->price * $cart->quantity;
+                                        }
+
+                                $cart->save();
+
+                                return redirect()->back()->with('message','Product Added Successfully');
+
+                            }
+
+                        else
+                            {
+                                $cart=new cart;
+                                $cart->name=$user->name;
+                                $cart->email=$user->email;
+                                $cart->phone=$user->phone;
+                                $cart->address=$user->address;
+                                $cart->user_id=$user->id;
+
+                                $cart->Product_title=$product->title;
+
+                                if($product->dis_price!=null)
+                                    {
+                                        //add this "* $request->quantity" conditional statement that calculates the price of a product
+                                        $cart->price=$product->discount_price * $request->quantity;
+                                    }
+                                else
+                                    {
+                                        //add this "* $request->quantity" conditional statement that calculates the price of a product
+                                        $cart->price=$product->price * $request->quantity;
+                                    }
+
+                                        $cart->image=$product->image;
+                                        $cart->Product_id=$product->id;
+
+                                        $cart->quantity=$request->quantity;
+
+                                        $cart->save();
+
+                                        return redirect()->back()->with('message','Product Added Successfully');
+                            }
+
+
+
+
+
+                    }
                 else
-                {
-                    //add this "* $request->quantity" conditional statement that calculates the price of a product
-                    $cart->price=$product->price * $request->quantity;
-                }
-
-                $cart->image=$product->image;
-                $cart->Product_id=$product->id;
-
-                $cart->quantity=$request->quantity;
-
-                $cart->save();
-
-                return redirect()->back();
-
+                    {
+                        return redirect('login');
+                    }
             }
-        else
-            {
-                return redirect('login');
-            }
-    }
     //this function will show cart notification sign after user add card
     //use this logic function "$id=Auth::user()->id;" makesure to know user
     //authticate user add cart after login
@@ -150,7 +186,7 @@ class HomeController extends Controller
             $totalQuantity = Cart::where('user_id', $userId)->count();
 
 
-                $id=Auth::user()->id;
+            $id=Auth::user()->id;
             $cart=cart::where('user_id','=',$id)->get();
             return view('home.showcart', compact('cart', 'totalQuantity'));
         }
@@ -213,7 +249,8 @@ public function stripe($totalprice)
     $userId = Auth::user()->id;
     $totalQuantity = Cart::where('user_id', $userId)->count();
 
-    return view('home.stripe', compact('totalprice', 'totalQuantity'));
+
+    return view('home.stripe', compact('totalprice','totalQuantity'));
 }
 
 public function stripePost(Request $request, $totalprice)
@@ -261,21 +298,19 @@ public function stripePost(Request $request, $totalprice)
             return back();
         }
         // This function logic is for view product for user
-        public function productview()
+        public function product()
             {
-                $product = Product::all();
+                $product=Product::paginate(10);
 
+                $userId = Auth::user()->id;
 
+                $totalQuantity = Cart::where('user_id', $userId)->count();
 
-                    $user=Auth::user();
-                    $userid=$user->id;
-                    //
+                $comment=comment::orderby('id','desc')->get();
 
-                    $totalQuantity = Cart::where('user_id', $userid)->count();
+                $reply=reply::all();
 
-                    $order=order::where('user_id','=',$userid)->get();
-
-                    return view('home.productview',compact('product' ,'totalQuantity'));
+                return view('home.all_product',compact('product','totalQuantity','comment','reply'));
             }
             // This function logic is for show user order in card
             public function show_order()
@@ -354,9 +389,23 @@ public function stripePost(Request $request, $totalprice)
 
                     $product=product::where('title','LIKE',"%$search_text%")->orWhere('category','LIKE',"%$search_text%")->paginate(10);
 
-                    return view('home.userpage',compact('product','comment','reply'));
+                    return view('home.all_product',compact('product','comment','reply'));
 
                 }
+
+                public function search_product(Request $request)
+                {
+                    $comment=comment::orderby('id','desc')->get();
+
+                    $reply=reply::all();
+                    $search_text=$request->search;
+
+                    $product=product::where('title','LIKE',"%$search_text%")->orWhere('category','LIKE',"%$search_text%")->paginate(10);
+
+                    return view('home.all_product',compact('product','comment','reply'));
+
+                }
+
 
     }
 

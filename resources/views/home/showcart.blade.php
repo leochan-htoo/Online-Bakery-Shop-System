@@ -155,8 +155,14 @@
                 <tr>
                     <td>{{$cart->product_title}}</td>
                     <td>{{$cart->quantity}}</td>
-                    <td>{{$cart->price}}BTH</td>
-                    <td><img class="img_deg" src="/product/{{$cart->image}}" alt=""></td>
+                    <td>{{$cart->price}} THB</td>
+
+                    <td style="text-align: center; vertical-align: middle;">
+                        <div style="display: flex; justify-content: center;">
+                            <img class="img_deg" src="/product/{{$cart->image}}" alt="">
+                        </div>
+                    </td>
+
                         <td>
                             {{-- add this onclick="return confirm warning first poshup to bar of navbar before to remove --}}
                             <a class="btn btn-danger" onclick="return confirm('Are you sure to remove this product?')" href="{{url('/remove_cart',$cart->id)}}">Remove</a>
@@ -167,7 +173,7 @@
             <tr>
                 <td class="no-border"></td>
                 <td class="no-border"></td>
-                <td class="no-border"><h1 class="">Total Price: {{$totalprice}}BTH</h1></td>
+                <td class="no-border"><h1 class="">Total Price: {{$totalprice}} THB</h1></td>
                 <td class="no-border"></td>
                 <td class="no-border"></td>
             </tr>
@@ -181,7 +187,7 @@
             </table>
 
             <div>
-              <h1>Total Price: {{$totalprice}}BTH</h1>
+              <h1>Total Price: {{$totalprice}} THB</h1>
             </div>
 
             <div class="proceed-section">

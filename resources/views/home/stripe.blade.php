@@ -22,6 +22,25 @@
 
         <style type="text/css">
 
+         .cart-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -10px; /* Adjust the top position to move the number higher */
+            right: 5px;
+            background-color: red; /* Customize the background color */
+            color: white; /* Customize the text color */
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-size: 10px
+
+        }
+
+
             .containers {
             display: flex;
             flex-direction: column;
