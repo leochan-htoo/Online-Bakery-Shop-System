@@ -29,7 +29,7 @@ Route::middleware([
 });
 
 // add this route for view redirect admin panel dashboard in admin
-route::get('/redirect', [HomeController::class,'redirect']);
+route::get('/redirect', [HomeController::class,'redirect'])->middleware('auth', 'verified');
 
 // route::get('/productview', [HomeController::class,'productview']);
 
