@@ -65,9 +65,18 @@
 
                 @endif
 
-
                 <h2 class="font_size">All Products</h2>
 
+                <div style="padding-left: 400px; padding-bottom: 30px;">
+
+                    <form action="{{url('searchproduct')}}" method="get">
+                        @csrf
+                        <input type="text" style="color: black;" name="search" placeholder="Search For Something">
+
+                        <input type="submit" value="Search" class="btn btn-outline-primary">
+                    </form>
+
+                </div>
                 <table class="center border-table">
                     <tr>
                         <th>Product title</th>
@@ -81,7 +90,7 @@
                         <th>Edit</th>
                     </tr>
 
-                    @foreach ($product as $product)
+                    @foreach ($products as $product)
 
                         <tr>
                             <td>{{$product->title}}</td>
@@ -105,7 +114,8 @@
 
                     @endforeach
                 </table>
-
+                <br>
+                {{$products->links('pagination::bootstrap-5')}}
             </div>
         </div>
     <!-- container-scroller -->
