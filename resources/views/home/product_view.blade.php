@@ -22,11 +22,10 @@
                             <a href="{{ url('product_details', $products->id) }}" class="option1">
                                 Product Detail
                             </a>
-                            <form action="{{url('add_cart', $products->id)}}" method="Post">
+                            <form action="{{ url('add_cart', $products->id) }}" method="post">
                                 @csrf
 
                                 <div class="row">
-
                                     <div class="col-md-4">
                                         <input type="number" name="quantity" value="1" min="1" style="width: 100px">
                                     </div>
@@ -35,8 +34,11 @@
                                         <input type="submit" value="Add to Cart">
                                     </div>
                                 </div>
-
                             </form>
+
+                            @if ($products->quantity === 0)
+                                <p style="color: red">Available Quantity: 0 - Product is out of stock</p>
+                            @endif
 
                         </div>
                     </div>

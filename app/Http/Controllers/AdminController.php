@@ -12,6 +12,10 @@ use App\Models\Order;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Validation\Rule;
+
 
 use PDF;
 
@@ -19,30 +23,83 @@ class AdminController extends Controller
 
 {
     // this code function is for view product catagory for admin catagory
-    public function view_catagory()
-        {
-            if(Auth::id())
-            {
-                $data=category::all();
-                return view('admin.category',compact("data"));
+    public function view_catagory(Request $request)
+    {
+        if (Auth::id()) {
+            if ($request->isMethod('post')) {
+                // Validation rules
+                $rules = [
+                    'category_name' => [
+                        'required',
+                        Rule::unique('categories', 'name')->ignore($request->category_id)->whereNull('deleted_at')
+                    ],
+                ];
+
+                // Custom error messages
+                $messages = [
+                    'category_name.required' => 'Category name is required.',
+                    'category_name.unique' => 'Category name already exists.',
+                ];
+
+                // Validate the request data
+                $validator = Validator::make($request->all(), $rules, $messages);
+
+                // Check if validation fails
+                if ($validator->fails()) {
+                    return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+                }
+
+                // If validation passes, create/update the category
+                $category = \App\Models\Category::find($request->category_id);
+                if (!$category) {
+                    $category = new \App\Models\Category;
+                }
+                $category->name = $request->input('category_name');
+                $category->save();
+
+                return redirect()->route('admin.category')->with('success', 'Category added/updated successfully.');
             }
-            else{
-                return redirect('login');
-            }
 
-
-
+            // If it's a GET request, just retrieve and show the categories
+            $data = \App\Models\Category::all();
+            return view('admin.category', compact('data'));
+        } else {
+            return redirect('login');
         }
+    }
     // this code function is for add product catagory for admin catagory
     public function add_catagory(Request $request)
-        {
-            $data=new category;
+{
+    // Validation rules
+    $rules = [
+        'category' => 'required|unique:categories,category_name',
+    ];
 
-            $data->category_name=$request->category;
+    // Custom error messages
+    $messages = [
+        'category.required' => 'Category name is required.',
+        'category.unique' => 'Category name already exists.',
+    ];
 
-            $data->save();
-            return redirect()->back()->with('message','Category Added Successfully');
-        }
+    // Validate the request data
+    $validator = Validator::make($request->all(), $rules, $messages);
+
+    // Check if validation fails
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withErrors($validator)
+            ->withInput();
+    }
+
+    // If validation passes, create the category
+    $category = new Category;
+    $category->category_name = $request->category;
+    $category->save();
+
+    return redirect()->back()->with('message', 'Category Added Successfully');
+}
     // this code function is for delete action for admin catagory
     public function delete_catagory($id)
         {
