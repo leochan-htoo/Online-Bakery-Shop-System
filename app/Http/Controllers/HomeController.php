@@ -105,18 +105,18 @@ class HomeController extends Controller
 
             // Check if the product exists
             if (!$product) {
-                return redirect()->back()->with('error', 'Product not found');
+                return redirect()->back()->with('message', 'Product not found');
             }
 
             // Check if the product quantity is zero
             if ($product->quantity === 0) {
-                return redirect()->back()->with('error', 'Product is out of stock');
+                return redirect()->back()->with('message', 'Product is out of stock');
             }
 
             // Check if the requested quantity is zero
             $requestedQuantity = $request->quantity;
             if ($requestedQuantity <= 0) {
-                return redirect()->back()->with('error', 'Invalid quantity');
+                return redirect()->back()->with('message', 'Invalid quantity');
             }
 
             $product_exist_id = Cart::where('product_id', '=', $id)->where('user_id', '=', $userid)->first();
@@ -127,9 +127,6 @@ class HomeController extends Controller
                 // Check if adding the requested quantity exceeds the available quantity
                 $newQuantity = $cart->quantity + $requestedQuantity;
 
-                if ($newQuantity > $product->quantity) {
-                    return redirect()->back()->with('error', 'Quantity exceeds available stock');
-                }
 
                 $cart->quantity = $newQuantity;
 

@@ -70,7 +70,7 @@ class AdminController extends Controller
         }
     }
     // this code function is for add product catagory for admin catagory
-    public function add_catagory(Request $request)
+    public function add_category(Request $request)
 {
     // Validation rules
     $rules = [
@@ -198,11 +198,13 @@ class AdminController extends Controller
 
 
         }
-    public function order()
+        public function order()
         {
-        $order=order::all();
-            return view('admin.order',compact('order'));
+            // Use paginate() to get a paginated result
+            $orders = Order::paginate(5);
+            return view('admin.order', compact('orders'));
         }
+
     //create this controller function logic for delivered
     public function delivered($id)
         {
@@ -228,10 +230,10 @@ class AdminController extends Controller
     public function searchdata(Request $request)
         {
             $searchText = $request->search;
-            $order = Order::where('name', 'LIKE', '%' . $searchText . '%')->orWhere('phone', 'LIKE', '%' . $searchText . '%')
+            $orders = Order::where('name', 'LIKE', '%' . $searchText . '%')->orWhere('phone', 'LIKE', '%' . $searchText . '%')
             ->orWhere('product_title', 'LIKE', '%' . $searchText . '%')->get();
 
-            return view('admin.order', compact('order'));
+            return view('admin.order', compact('orders'));
         }
 
 }
